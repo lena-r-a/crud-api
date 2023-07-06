@@ -3,6 +3,13 @@ import { users } from './data/users';
 import { Controller } from './controller/controller';
 import { getReqData } from './utils/utils';
 
+interface iUser {
+  id: string,
+  username: string,
+  age: number,
+  hobbies: string[],
+}
+
 const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
 
 const port = process.env.PORT || 3000;
@@ -33,8 +40,21 @@ const server = http.createServer(async (req, res) => {
       if (status == 400) {
         res.end("Invalid id")
       } else res.end(error);
-  }
-    
+    }
+
+  } else if (req.url === "/api/users" && req.method === "POST") {
+    try {
+      let userData = await getReqData(req);
+      console.log(userData);
+      let newUser = await new Controller().createUser(JSON.parse(userData));
+      res.writeHead(200, { "Content-Type": "application/json" });
+      users.push(newUser as iUser);
+      res.end(JSON.stringify(newUser));
+
+    } catch (error) {
+      res.writeHead(404, { "Content-Type": "application/json" });
+      res.end(error);
+    }
   }
 
   else {

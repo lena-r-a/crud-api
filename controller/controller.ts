@@ -1,11 +1,22 @@
 import { users } from "../data/users";
+import { getUUID, validateFields } from "../utils/utils";
 
 const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
 
-interface FullError {
-  "statusCode" : number,
-  "errorMessage": string
+interface iUserCreate {
+  username: string,
+  age: number,
+  hobbies: string[],
 }
+
+interface iUser {
+    id: string,
+    username: string,
+    age: number,
+    hobbies: string[],
+  }
+
+let user1: iUser = users[1];
 
 export class Controller {
     async getUsers() {
@@ -24,19 +35,19 @@ export class Controller {
         });
     }
 
-    // // creating a todo
-    // async createTodo(todo) {
-    //     return new Promise((resolve, _) => {
-    //         // create a todo, with random id and data sent
-    //         let newTodo = {
-    //             id: Math.floor(4 + Math.random() * 10),
-    //             ...todo,
-    //         };
-
-    //         // return the new created todo
-    //         resolve(newTodo);
-    //     });
-    // }
+    async createUser(user: iUserCreate) : Promise<string | iUser>{
+        return new Promise((resolve, reject) => {
+            if (validateFields(user, user1)) {
+                let newTodo = {
+                    id: getUUID(),
+                    ...user,
+                } 
+    
+                resolve(newTodo);
+                
+            } else reject("Wrong data");
+        });
+    }
 
     // // updating a todo
     // async updateTodo(id) {
