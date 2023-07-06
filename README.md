@@ -1,5 +1,13 @@
 # crud-api
 
+npm i - to install dependencies \
+
+npm run dev - run development mode \
+
+npm run start - run prod mode \
+
+npm build - builds app into index.js \
+
 npm run start  - to start app \
 \
 server loadede on http://localhost:3000 \
