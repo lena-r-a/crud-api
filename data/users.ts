@@ -5,7 +5,7 @@ interface iUser {
   hobbies: string[],
 }
 
-export const users: iUser[] = [
+export let users: iUser[] = [
   {
     "id": "08f02912-19ef-11ee-be56-0242ac120002",
     "username": "Lena",

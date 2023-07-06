@@ -55,6 +55,24 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(404, { "Content-Type": "application/json" });
       res.end(error);
     }
+  } else if (req.url?.match(/\/api\/users\/([0-9A-za-z]+)/) && req.method === "PUT") {
+    const id = req.url.split("/")[3];
+    try {
+      let userData = await getReqData(req);
+      let updatedUser = await new Controller().updateUser(id, JSON.parse(userData));
+      res.writeHead(200, { "Content-Type": "application/json" });
+      users.findIndex(user => user.id == id);
+      let index = users.findIndex(user => user.id == id)
+      Object.assign(users[index],updatedUser as iUser);
+      res.end(JSON.stringify(users.find((user) => user.id == id)));
+
+    } catch (error) {
+      const status = regexExp.test(id) ? 404 : 400;
+      res.writeHead(status, { "Content-Type": "application/json" });
+      if (status == 400) {
+        res.end("Invalid id")
+      } else res.end(error);
+    }
   }
 
   else {

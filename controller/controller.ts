@@ -49,21 +49,21 @@ export class Controller {
         });
     }
 
-    // // updating a todo
-    // async updateTodo(id) {
-    //     return new Promise((resolve, reject) => {
-    //         // get the todo.
-    //         let todo = data.find((todo) => todo.id === parseInt(id));
-    //         // if no todo, return an error
-    //         if (!todo) {
-    //             reject(`No todo with id ${id} found`);
-    //         }
-    //         //else, update it by setting completed to true
-    //         todo["completed"] = true;
-    //         // return the updated todo
-    //         resolve(todo);
-    //     });
-    // }
+    async updateUser(id:string, user: iUserCreate) : Promise<string | iUser> {
+        return new Promise((resolve, reject) => {
+            let userIndex = users.findIndex((user) => user.id === id);
+            if (userIndex == -1) {
+                reject(`No user with id ${id} found`);
+            }
+            let updatedUser = {
+                id: id,
+                ...user,
+            }
+            console.log(users)
+            users[userIndex] = updatedUser;
+            resolve(updatedUser);
+        });
+    }
 
     // // deleting a todo
     // async deleteTodo(id) {
