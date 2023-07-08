@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from "http";
-import crypto from 'crypto';
+import * as crypto from "crypto";
 import { Stream } from 'stream';
 
 interface iUser {
@@ -8,6 +8,7 @@ interface iUser {
     age: number,
     hobby: string[],
   }
+
 
 export const getReqData =(req: IncomingMessage):Promise<string> => {
   return new Promise((resolve, reject) => {

@@ -1,4 +1,4 @@
-import http from 'http'
+import {createServer} from 'node:http'
 import { users } from './data/users';
 import { Controller } from './controller/controller';
 import { getReqData } from './utils/utils';
@@ -14,7 +14,7 @@ const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F
 
 const port = process.env.PORT || 3000;
 
-const server = http.createServer(async (req, res) => {
+const server = createServer(async (req, res) => {
   if (req.url === "/api" && req.method === "GET") {
 
     res.writeHead(200, { "Content-Type": "application/json" });
