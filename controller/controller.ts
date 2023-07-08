@@ -65,17 +65,13 @@ export class Controller {
         });
     }
 
-    // // deleting a todo
-    // async deleteTodo(id) {
-    //     return new Promise((resolve, reject) => {
-    //         // get the todo
-    //         let todo = data.find((todo) => todo.id === parseInt(id));
-    //         // if no todo, return an error
-    //         if (!todo) {
-    //             reject(`No todo with id ${id} found`);
-    //         }
-    //         // else, return a success message
-    //         resolve(`Todo deleted successfully`);
-    //     });
-    // }
+    async deleteUser(id: string) {
+        return new Promise((resolve, reject) => {
+            let deletedUser = users.find((user) =>user.id === id);
+            if (!deletedUser) {
+                reject(`No user with id ${id} found`);
+            }
+            resolve(`User deleted successfully`);
+        });
+    }
 }

@@ -73,6 +73,26 @@ const server = http.createServer(async (req, res) => {
         res.end("Invalid id")
       } else res.end(error);
     }
+  } else if(req.url?.match(/\/api\/users\/([0-9A-za-z]+)/) && req.method === "DELETE") {
+
+    const id = req.url.split("/")[3];
+    try {
+      let massege = await new Controller().deleteUser(id);
+      res.writeHead(204, { "Content-Type": "plain/text" });
+      users.findIndex(user => user.id == id);
+      let index = users.findIndex(user => user.id == id)
+      let newUsers = users.splice(index, 1);
+      console.log(massege);
+      res.end("deleted");
+
+    } catch (error) {
+      const status = regexExp.test(id) ? 404 : 400;
+      res.writeHead(status, { "Content-Type": "application/json" });
+      if (status == 400) {
+        res.end("Invalid id")
+      } else res.end(error);
+    }
+
   }
 
   else {
