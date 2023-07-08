@@ -2,21 +2,21 @@
 
 npm i - to install dependencies \
 
-npm run dev - run development mode \
+npm run start:dev - run development mode \
 
-npm run start - run prod mode \
+npm run start:build - run prod mode \
 
-npm build - builds app into index.js \
-
-npm run start  - to start app \
-\
-server loadede on http://localhost:3000 \
+server loaded on http://localhost:3000 \
 \
 GET: /api/users - get all users \
 \
 GET: /api/users/userid - get by id \
 \
-POST: /api/users with JSON 
+POST: /api/users - create user 
+
+PUT: /api/users/userid update user
+
+DELETE: /api/users/userid delete user
 {
 "username" : "Username",
 "age" : 22,
